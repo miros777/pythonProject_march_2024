@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 from django.conf.global_settings import APPEND_SLASH
@@ -22,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@b*8vqpn29z_ay+dq5^km55*j8+1*08iyv2q8!)wpg%=x#l_d^'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 
     #my apps
     'apps.cars',
+    'apps.autoparks',
 
 ]
 
@@ -80,11 +82,11 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'march2024python',
-        'USER': 'march2024python',
-        'PASSWORD': 'admin',
-        "HOST": 'owu.linkpc.net',
-        "PORT": '3306'
+        'NAME': os.environ.get('MYSQL_DATABASE'),
+        'USER': os.environ.get('MYSQL_USER'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+        "HOST": os.environ.get('MYSQL_HOST'),
+        "PORT": os.environ.get('MYSQL_PORT')
     }
 }
 
