@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from apps.cars.models import CarModel
 
-
 # class CarSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
 #     model = serializers.CharField(max_length=50)
@@ -25,4 +24,4 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
         # fields = '__all__'
-        fields = ('id', 'model', 'price', 'year', 'created_at', 'update_at')
+        fields = ('id', 'model', 'body_type', 'price', 'year', 'created_at', 'update_at')
