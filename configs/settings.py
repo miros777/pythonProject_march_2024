@@ -15,6 +15,8 @@ from pathlib import Path
 
 from django.conf.global_settings import APPEND_SLASH
 
+from .extra_conf import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'django_filters',
 
     #my apps
     'apps.cars',
