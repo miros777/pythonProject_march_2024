@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     #my apps
+    'core',
     'apps.cars',
     'apps.autoparks',
 
