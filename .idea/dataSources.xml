@@ -17,11 +17,11 @@
       <jdbc-url>jdbc:mysql://owu.linkpc.net:3306/march2024python</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="0c95d33a-a5c6-4c7d-a688-026081344def">
+    <data-source source="LOCAL" name="@localhost" uuid="58dcc3fe-aca1-4c2c-8148-ecf0b010c76c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3333</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3307</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

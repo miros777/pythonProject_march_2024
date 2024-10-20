@@ -14,9 +14,10 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <sourceFolder url="file://$MODULE_DIR$/backend" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/backend/apps" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Remote Python 3.11.10 Docker Compose (app)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.11.10 Docker Compose (app) (8)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
