@@ -12,7 +12,7 @@ class CarsListView(ListAPIView):
     queryset = CarModel.objects.less_than_year(2001).only_audi()
     pagination_class = None #відключаємо пагінацію
     filterset_class = CarFilter
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = CarSerializer
