@@ -3,7 +3,7 @@ from django.contrib.auth.models import UserManager as Manager
 
 class UserManager(Manager):
 
-    def create_user(self, username, email=None, password=None, **extra_fields):
+    def create_user(self, email=None, password=None, **extra_fields):
 
         if not email:
             raise ValueError('Email must have an email')
@@ -18,10 +18,10 @@ class UserManager(Manager):
         user.save()
         return user
 
-    def create_superuser(self, username, email=None, password=None, **extra_fields):
+    def create_superuser(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
 
         if extra_fields['is_active'] is not True:
             raise ValueError('Superuser must have is_active=True')

@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from apps.users.models import ProfileModel, UserModel
 
+from apps.users.models import ProfileModel
 from django.contrib.auth import get_user_model
-
+from django.db.transaction import atomic
 UserModel = get_user_model()
 
 
@@ -11,8 +11,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = ProfileModel
         fields = ('id', 'name', 'surname', 'age', 'created_at', 'update_at')
 
+
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+
     class Meta:
         model = UserModel
         fields = (
@@ -25,6 +27,20 @@ class UserSerializer(serializers.ModelSerializer):
             'last_login',
             'created_at',
             'update_at',
-            'profile',
+            'profile'
         )
+
         read_only_fields = ('id', 'is_active', 'is_staff', 'is_superuser', 'last_login', 'created_at', 'update_at')
+        extra_kwargs = {
+            'password': {
+                'write_only': True,
+            }
+        }
+    @atomic
+    def create(self, validated_data:dict):
+        profile = validated_data.pop('profile')
+        user = UserModel.objects.create_user(**validated_data)
+        profile = ProfileModel.objects.create(**profile, user=user)
+        # if profile.surname == 'Kokosovich':
+        #     raise ValueError('invalid surname')
+        return user
