@@ -13,7 +13,6 @@ class AutoParkListCreateAPIView(ListCreateAPIView):
     serializer_class = AutoParkSerializer
     queryset = AutoParkModel.objects.all()
 
-
 class AutoParkAddCarView(CreateAPIView):
     queryset = AutoParkModel.objects.all()
 
