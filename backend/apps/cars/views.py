@@ -1,12 +1,11 @@
-
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from django.views.generic import UpdateView
 from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 
-from apps.cars.serializers import CarSerializer
 from apps.cars.filters import CarFilter
 from apps.cars.models import CarModel
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
-
+from apps.cars.serializers import CarSerializer, CarPhotoSerializer
 
 
 class CarsListView(ListAPIView):
@@ -20,6 +19,20 @@ class CarsListView(ListAPIView):
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = CarSerializer
     queryset = CarModel.objects.all()
+
+class CarAddPhotoView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CarPhotoSerializer
+    queryset = CarModel.objects.all()
+    http_method_names = ('patch',) # які дозволені
+
+    def perform_update(self, serializer):
+        car = self.get_object()
+        car.photo.delete()
+
+        super().perform_update(serializer)
+
+
 
 
 

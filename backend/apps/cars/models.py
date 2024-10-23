@@ -4,6 +4,7 @@ from django.core import validators as V
 from django.db import models
 
 from apps.cars.managers import CarManager
+from apps.cars.services import upload_car_photo
 from core.models import BaseModel
 
 from apps.auto_parks.models import AutoParkModel
@@ -21,6 +22,7 @@ class CarModel(BaseModel):
     price = models.IntegerField(validators=[V.MinValueValidator(1), V.MaxValueValidator(1000000)])
     year = models.IntegerField(validators=[V.MinValueValidator(1999), V.MaxValueValidator(datetime.now().year)])
     auto_parks = models.ForeignKey(AutoParkModel, on_delete=models.CASCADE, related_name='cars')
+    photo = models.ImageField(upload_to=upload_car_photo, blank=True)
 
     objects = CarManager()
 
