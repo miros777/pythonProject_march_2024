@@ -13,7 +13,7 @@ class CarsListView(ListAPIView):
     queryset = CarModel.objects.all()
     # pagination_class = None #відключаємо пагінацію
     filterset_class = CarFilter
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (AllowAny, )
 
 
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):

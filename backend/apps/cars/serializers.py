@@ -6,7 +6,7 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
         # fields = '__all__'
-        fields = ('id', 'model', 'body_type', 'price', 'year', 'created_at', 'update_at')
+        fields = ('id', 'model', 'body_type', 'price', 'year', 'created_at', 'update_at', 'photo')
 
     def validate(self, car):
         if car['model'] == 'KIA':
