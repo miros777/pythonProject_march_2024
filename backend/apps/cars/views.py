@@ -1,11 +1,9 @@
-from django.views.generic import UpdateView
-from rest_framework.permissions import AllowAny
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from apps.cars.filters import CarFilter
 from apps.cars.models import CarModel
-from apps.cars.serializers import CarSerializer, CarPhotoSerializer
+from apps.cars.serializers import CarPhotoSerializer, CarSerializer
 
 
 class CarsListView(ListAPIView):
