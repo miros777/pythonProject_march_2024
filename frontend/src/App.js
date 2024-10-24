@@ -7,7 +7,7 @@ const App = () => {
     useEffect(() => {
         axios.get('/api/cars').then(({data}) => {
             setCars(data.data)
-            console.log(data.data)
+            // console.log(data.data)
         })
     }, []);
 
