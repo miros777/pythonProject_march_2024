@@ -17,4 +17,5 @@ class ActivateUserView(GenericAPIView):
         user.is_active = True
         user.save()
         serializer = UserSerializer(user)
+
         return Response(serializer.data, status=status.HTTP_200_OK)
