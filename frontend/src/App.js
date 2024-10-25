@@ -20,7 +20,10 @@ const App = () => {
                         <div>MODEL: {car.model}</div>
                         <div>PRICE: {car.price}</div>
                         <div>YEAR: {car.year}</div>
-                        <img src={car.photo} alt={car.model} width='150px'/>
+                        {car.photos && car.photos.map(photo =>
+                            <img src={photo.photo} alt={car.model} width='150px'/>
+                        )}
+
                     </div>
             )}
         </div>

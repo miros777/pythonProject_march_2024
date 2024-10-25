@@ -1,5 +1,7 @@
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework import status
+from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
 from apps.cars.filters import CarFilter
 from apps.cars.models import CarModel
@@ -15,22 +17,22 @@ class CarsListView(ListAPIView):
 
 
 class CarRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = CarModel.objects.all()
     serializer_class = CarSerializer
-    queryset = CarModel.objects.all()
 
-class CarAddPhotoView(UpdateAPIView):
+class CarAddPhotosView(GenericAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = CarPhotoSerializer
+    # serializer_class = CarPhotoSerializer
     queryset = CarModel.objects.all()
-    http_method_names = ('patch',) # які дозволені
 
-    def perform_update(self, serializer):
+    def put(self, *args, **kwargs):
+        files = self.request.FILES
         car = self.get_object()
-        car.photo.delete()
-
-        super().perform_update(serializer)
-
-
-
+        for index in files:
+            serializer = CarPhotoSerializer(data={'photo': files[index]})
+            serializer.is_valid(raise_exception=True)
+            serializer.save(car=car)
+        car_serializer = CarSerializer(car)
+        return Response(car_serializer.data, status=status.HTTP_200_OK)
 
 
