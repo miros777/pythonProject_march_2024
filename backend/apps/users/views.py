@@ -1,9 +1,14 @@
 from django.contrib.auth import \
     get_user_model  # для юзера, так якщо відразу в queryset модель юзера покласти, то потім будуть помилки
+
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, CreateAPIView, GenericAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+from rest_framework.generics import CreateAPIView, GenericAPIView, ListCreateAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from core.services.email_service import EmailService
 
 from apps.users.serializers import UserSerializer
 
@@ -12,6 +17,7 @@ UserModel = get_user_model()
 class UserListCreateView(ListCreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
+    permission_classes=(AllowAny,)
 
 class UserMeView(CreateAPIView):
     serializer_class = UserSerializer
@@ -82,6 +88,13 @@ class AdminToUserView(GenericAPIView):
 
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TestEmailView(GenericAPIView):
+    permission_classes = (AllowAny, )
+    def get(self, *args, **kwargs):
+        EmailService.send_test()
+        return Response(status=status.HTTP_200_OK)
+
 
 
 
