@@ -22,6 +22,10 @@ class ActivateToken(ActionToken):
     token_type = ActionTokenEnum.ACTIVATE.token_type
     lifetime = ActionTokenEnum.ACTIVATE.lifetime
 
+class RecoveryToken(ActionToken):
+    token_type = ActionTokenEnum.RECOVERY_PASSWORD.token_type
+    lifetime = ActionTokenEnum.RECOVERY_PASSWORD.lifetime
+
 
 class JWTService:
     @staticmethod

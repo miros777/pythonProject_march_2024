@@ -96,5 +96,3 @@ class TestEmailView(GenericAPIView):
         return Response(status=status.HTTP_200_OK)
 
 
-
-
