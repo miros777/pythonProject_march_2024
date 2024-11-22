@@ -29,7 +29,7 @@ class RecoveryPasswordRequestView(GenericAPIView):
 
     def post(self, *args, **kwargs):
         data = self.request.data
-        serializer = self.serializer_class(data=data)
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         user = get_object_or_404(UserModel, **serializer.data)
         EmailService.recovery_password(user)
