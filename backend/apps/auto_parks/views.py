@@ -3,6 +3,9 @@ from django.core.serializers import serialize
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListCreateAPIView
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
+
+from drf_yasg.utils import swagger_auto_schema
 
 from apps.auto_parks.models import AutoParkModel
 from apps.auto_parks.serializers import AutoParkSerializer
@@ -15,7 +18,9 @@ class AutoParkListCreateAPIView(ListCreateAPIView):
 
 class AutoParkAddCarView(CreateAPIView):
     queryset = AutoParkModel.objects.all()
+    serializer_class = AutoParkSerializer
 
+    @swagger_auto_schema(request_body=Serializer)
     def post(self, *args, **kwargs):
         data  =self.request.data
         serializer = CarSerializer(data=data)

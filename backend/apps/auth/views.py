@@ -2,6 +2,9 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
+
+from drf_yasg.utils import swagger_auto_schema
 
 from core.services.email_service import EmailService
 from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken
@@ -13,7 +16,9 @@ from apps.users.serializers import UserSerializer
 
 class ActivateUserView(GenericAPIView):
     permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
 
+    @swagger_auto_schema(request_body=Serializer)
     def patch(self, *args, **kwargs):
         token = kwargs['token']
         user = JWTService.verify_token(token, ActivateToken)
